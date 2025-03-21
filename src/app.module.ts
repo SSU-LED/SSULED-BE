@@ -11,6 +11,7 @@ import { S3Module } from './modules/s3/s3.module';
 import { PostsModule } from './modules/posts/posts.module';
 import { HttpLoggerMiddleware } from './middlewares/http-logger.middleware';
 import { CommentsModule } from './modules/comments/comments.module';
+import { LikesModule } from './modules/likes/likes.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { CommentsModule } from './modules/comments/comments.module';
     S3Module,
     PostsModule,
     CommentsModule,
+    LikesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

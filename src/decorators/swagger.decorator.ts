@@ -391,6 +391,13 @@ export function ApiGetPostById() {
       required: true,
       type: 'string',
     }),
+    ApiQuery({
+      name: 'userUuid',
+      description: '현재 사용자 UUID (좋아요 상태 확인용)',
+      example: '123e4567-e89b-12d3-a456-426614174000',
+      required: false,
+      type: 'string',
+    }),
     ApiResponse({
       status: 200,
       description: '게시글 조회 성공',
@@ -420,11 +427,7 @@ export function ApiGetPostById() {
               type: 'string',
               enum: Object.values(BodyPartEnum),
             },
-            example: [
-              BodyPartEnum.CHEST,
-              BodyPartEnum.SHOULDERS_ARMS,
-              BodyPartEnum.BACK,
-            ],
+            example: ['CHEST', 'SHOULDERS_ARMS', 'BACK'],
           },
           duration: {
             type: 'number',
@@ -444,6 +447,16 @@ export function ApiGetPostById() {
             type: 'number',
             example: 15,
             description: '좋아요 수',
+          },
+          commentCount: {
+            type: 'number',
+            example: 5,
+            description: '댓글 수',
+          },
+          userLiked: {
+            type: 'boolean',
+            example: true,
+            description: '현재 사용자의 좋아요 여부',
           },
           comments: {
             type: 'array',
@@ -1211,6 +1224,213 @@ export function ApiDeleteComment() {
           statusCode: {
             type: 'number',
             example: 403,
+          },
+        },
+      },
+    }),
+  );
+}
+
+export function ApiCreateLike() {
+  return applyDecorators(
+    ApiOperation({
+      summary: '좋아요 추가',
+      description: '게시글에 좋아요를 추가합니다.',
+    }),
+    ApiBody({
+      schema: {
+        type: 'object',
+        properties: {
+          userUuid: {
+            type: 'string',
+            format: 'uuid',
+            description: '좋아요를 추가할 사용자 UUID',
+            example: '123e4567-e89b-12d3-a456-426614174000',
+          },
+          postId: {
+            type: 'integer',
+            description: '좋아요를 추가할 게시글 ID',
+            example: 1,
+          },
+        },
+        required: ['userUuid', 'postId'],
+      },
+    }),
+    ApiResponse({
+      status: 201,
+      description: '좋아요가 성공적으로 추가됨',
+      schema: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'integer',
+            example: 1,
+          },
+          likeCount: {
+            type: 'integer',
+            example: 15,
+            description: '게시글의 전체 좋아요 수',
+          },
+        },
+      },
+    }),
+    ApiResponse({
+      status: 400,
+      description: '잘못된 요청',
+      schema: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'array',
+            example: ['userUuid must be a UUID', 'postId must be a number'],
+          },
+          error: {
+            type: 'string',
+            example: 'Bad Request',
+          },
+          statusCode: {
+            type: 'number',
+            example: 400,
+          },
+        },
+      },
+    }),
+    ApiResponse({
+      status: 404,
+      description: '사용자를 찾을 수 없음',
+      schema: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            example:
+              'UUID 123e4567-e89b-12d3-a456-426614174000에 해당하는 사용자를 찾을 수 없습니다.',
+          },
+          error: {
+            type: 'string',
+            example: 'Not Found',
+          },
+          statusCode: {
+            type: 'number',
+            example: 404,
+          },
+        },
+      },
+    }),
+    ApiResponse({
+      status: 409,
+      description: '이미 좋아요한 게시글',
+      schema: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            example: '이미 좋아요한 게시글입니다.',
+          },
+          error: {
+            type: 'string',
+            example: 'Conflict',
+          },
+          statusCode: {
+            type: 'number',
+            example: 409,
+          },
+        },
+      },
+    }),
+  );
+}
+
+export function ApiCheckLikeStatus() {
+  return applyDecorators(
+    ApiOperation({
+      summary: '좋아요 상태 확인',
+      description: '사용자가 특정 게시글에 좋아요했는지 확인합니다.',
+    }),
+    ApiParam({
+      name: 'postId',
+      description: '확인할 게시글 ID',
+      required: true,
+      type: 'string',
+    }),
+    ApiParam({
+      name: 'userUuid',
+      description: '확인할 사용자 UUID',
+      example: '123e4567-e89b-12d3-a456-426614174000',
+      required: true,
+      type: 'string',
+    }),
+    ApiResponse({
+      status: 200,
+      description: '좋아요 상태 확인 성공',
+      schema: {
+        type: 'object',
+        properties: {
+          liked: {
+            type: 'boolean',
+            example: true,
+            description: '좋아요 여부',
+          },
+        },
+      },
+    }),
+  );
+}
+
+export function ApiDeleteLike() {
+  return applyDecorators(
+    ApiOperation({
+      summary: '게시글 좋아요 삭제',
+      description: '특정 게시글에 대한 사용자의 좋아요를 삭제합니다.',
+    }),
+    ApiParam({
+      name: 'postId',
+      description: '게시글 ID',
+      required: true,
+      type: 'string',
+    }),
+    ApiParam({
+      name: 'userUuid',
+      description: '사용자 UUID',
+      example: '123e4567-e89b-12d3-a456-426614174000',
+      required: true,
+      type: 'string',
+    }),
+    ApiResponse({
+      status: 200,
+      description: '좋아요가 성공적으로 삭제됨',
+      schema: {
+        type: 'object',
+        properties: {
+          success: {
+            type: 'boolean',
+            example: true,
+          },
+          likeCount: {
+            type: 'number',
+            example: 14,
+            description: '업데이트된 게시글의 전체 좋아요 수',
+          },
+        },
+      },
+    }),
+    ApiResponse({
+      status: 404,
+      description: '좋아요를 찾을 수 없음',
+      schema: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            example: '해당 게시글에 좋아요를 하지 않았습니다.',
+          },
+          error: {
+            type: 'string',
+            example: 'Not Found',
+          },
+          statusCode: {
+            type: 'number',
+            example: 404,
           },
         },
       },
