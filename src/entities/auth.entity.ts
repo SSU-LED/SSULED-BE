@@ -14,8 +14,8 @@ export class Auth {
   @Column({ name: 'refresh_token', type: 'varchar', nullable: true })
   refreshToken: string;
 
-  @Column({ name: 'access_token', type: 'varchar', nullable: true })
-  accessToken: string;
+  // @Column({ name: 'access_token', type: 'varchar', nullable: true })
+  // accessToken: string;
 
   @Column({ name: 'user_id', type: 'int' })
   userId: number;

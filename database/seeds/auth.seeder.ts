@@ -37,7 +37,7 @@ export class AuthSeeder implements Seeder {
       // 새 인증 정보 생성
       const auth = authRepository.create({
         userId: user.id,
-        accessToken: `access_${uuidv4()}`,
+        // accessToken: `access_${uuidv4()}`,
         refreshToken: `refresh_${uuidv4()}`,
       });
 
