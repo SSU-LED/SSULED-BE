@@ -3,7 +3,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { Auth } from '@/entities/auth.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserService } from '@/user/user.service';
+import { UsersService } from '@/modules/users/users.service';
 import { User } from '@/entities/user.entity';
 import { JwtKakaoStrategy } from './strategy/jwt-social-kakao.strategy';
 import { PassportModule } from '@nestjs/passport';
@@ -20,6 +20,6 @@ import { JwtNaverStrategy } from './strategy/jwt-social-naver.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserService, JwtKakaoStrategy, JwtNaverStrategy],
+  providers: [AuthService, UsersService, JwtKakaoStrategy, JwtNaverStrategy],
 })
 export class AuthModule {}

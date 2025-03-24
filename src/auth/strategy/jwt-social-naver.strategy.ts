@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-naver';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {
@@ -11,6 +12,7 @@ export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {
       clientID: configService.get('NAVER_ID'),
       clientSecret: configService.get('NAVER_SECRET'),
       callbackURL: configService.get('NAVER_REDIRECT_URL'),
+      passReqToCallback: true,
     });
   }
 
@@ -25,12 +27,14 @@ export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {
       const { id: naverId, _json } = profile;
       const nickname = _json.nickname;
       const profileImage = _json.profile_image;
+      const uuid = uuidv4();
 
       const user = {
         socialId: naverId,
         nickname,
         profileImage,
         socialProvider: SocialProvider.NAVER,
+        userUuid: uuid,
       };
       done(null, user);
     } catch (error) {

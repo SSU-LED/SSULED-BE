@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SocialRequest } from './auth.controller';
 import { Response } from 'express';
-import { UserService } from '@/user/user.service';
+import { UsersService } from '@/modules/users/users.service';
 import { v4 as uuidv4 } from 'uuid';
 import { JwtService } from '@nestjs/jwt';
 
@@ -12,7 +12,7 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(
     @InjectRepository(Auth) private readonly authRepository: Repository<Auth>,
-    private readonly userService: UserService,
+    private readonly userService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -65,6 +65,7 @@ export class AuthService {
         access_token,
       };
     } catch (error) {
+      console.log(error);
       return { ok: false, error: '구글 로그인 인증을 실패하였습니다.' };
     }
   }
@@ -119,6 +120,7 @@ export class AuthService {
         access_token,
       };
     } catch (error) {
+      console.log(error);
       return { ok: false, error: '구글 로그인 인증을 실패하였습니다.' };
     }
   }

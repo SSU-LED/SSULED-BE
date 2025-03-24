@@ -79,7 +79,7 @@ eval("\nvar __decorate = (this && this.__decorate) || function (decorators, targ
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.AppModule = void 0;\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst app_controller_1 = __webpack_require__(/*! ./app.controller */ \"./src/app.controller.ts\");\nconst app_service_1 = __webpack_require__(/*! ./app.service */ \"./src/app.service.ts\");\nconst nest_winston_1 = __webpack_require__(/*! nest-winston */ \"nest-winston\");\nconst config_1 = __webpack_require__(/*! @nestjs/config */ \"@nestjs/config\");\nconst typeorm_1 = __webpack_require__(/*! @nestjs/typeorm */ \"@nestjs/typeorm\");\nconst orm_config_1 = __webpack_require__(/*! ../config/orm.config */ \"./config/orm.config.ts\");\nconst logging_config_1 = __webpack_require__(/*! ../config/logging.config */ \"./config/logging.config.ts\");\nconst uploads_module_1 = __webpack_require__(/*! ./modules/uploads/uploads.module */ \"./src/modules/uploads/uploads.module.ts\");\nconst s3_module_1 = __webpack_require__(/*! ./modules/s3/s3.module */ \"./src/modules/s3/s3.module.ts\");\nlet AppModule = class AppModule {\n};\nexports.AppModule = AppModule;\nexports.AppModule = AppModule = __decorate([\n    (0, common_1.Module)({\n        imports: [\n            config_1.ConfigModule.forRoot({\n                isGlobal: true,\n                envFilePath: `env/.${\"development\"}.env`,\n            }),\n            nest_winston_1.WinstonModule.forRoot(logging_config_1.winstonConfig),\n            typeorm_1.TypeOrmModule.forRootAsync({\n                imports: [config_1.ConfigModule],\n                inject: [config_1.ConfigService],\n                useFactory: (configService) => (0, orm_config_1.default)(configService),\n            }),\n            uploads_module_1.UploadsModule,\n            s3_module_1.S3Module,\n        ],\n        controllers: [app_controller_1.AppController],\n        providers: [app_service_1.AppService],\n    })\n], AppModule);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/app.module.ts?");
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.AppModule = void 0;\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst app_controller_1 = __webpack_require__(/*! ./app.controller */ \"./src/app.controller.ts\");\nconst app_service_1 = __webpack_require__(/*! ./app.service */ \"./src/app.service.ts\");\nconst nest_winston_1 = __webpack_require__(/*! nest-winston */ \"nest-winston\");\nconst config_1 = __webpack_require__(/*! @nestjs/config */ \"@nestjs/config\");\nconst typeorm_1 = __webpack_require__(/*! @nestjs/typeorm */ \"@nestjs/typeorm\");\nconst orm_config_1 = __webpack_require__(/*! ../config/orm.config */ \"./config/orm.config.ts\");\nconst logging_config_1 = __webpack_require__(/*! ../config/logging.config */ \"./config/logging.config.ts\");\nconst uploads_module_1 = __webpack_require__(/*! ./modules/uploads/uploads.module */ \"./src/modules/uploads/uploads.module.ts\");\nconst s3_module_1 = __webpack_require__(/*! ./modules/s3/s3.module */ \"./src/modules/s3/s3.module.ts\");\nconst auth_module_1 = __webpack_require__(/*! ./auth/auth.module */ \"./src/auth/auth.module.ts\");\nconst user_module_1 = __webpack_require__(/*! ./user/user.module */ \"./src/user/user.module.ts\");\nlet AppModule = class AppModule {\n};\nexports.AppModule = AppModule;\nexports.AppModule = AppModule = __decorate([\n    (0, common_1.Module)({\n        imports: [\n            config_1.ConfigModule.forRoot({\n                isGlobal: true,\n                envFilePath: `env/.${\"development\"}.env`,\n            }),\n            nest_winston_1.WinstonModule.forRoot(logging_config_1.winstonConfig),\n            typeorm_1.TypeOrmModule.forRootAsync({\n                imports: [config_1.ConfigModule],\n                inject: [config_1.ConfigService],\n                useFactory: (configService) => (0, orm_config_1.default)(configService),\n            }),\n            uploads_module_1.UploadsModule,\n            s3_module_1.S3Module,\n            auth_module_1.AuthModule,\n            user_module_1.UserModule,\n        ],\n        controllers: [app_controller_1.AppController],\n        providers: [app_service_1.AppService],\n    })\n], AppModule);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/app.module.ts?");
 
 /***/ }),
 
@@ -91,6 +91,61 @@ eval("\nvar __decorate = (this && this.__decorate) || function (decorators, targ
 
 "use strict";
 eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.AppService = void 0;\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nlet AppService = class AppService {\n    getHello() {\n        console.log(process.env.PORT);\n        return 'Hello World!';\n    }\n};\nexports.AppService = AppService;\nexports.AppService = AppService = __decorate([\n    (0, common_1.Injectable)()\n], AppService);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/app.service.ts?");
+
+/***/ }),
+
+/***/ "./src/auth/auth.controller.ts":
+/*!*************************************!*\
+  !*** ./src/auth/auth.controller.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nvar __metadata = (this && this.__metadata) || function (k, v) {\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(k, v);\n};\nvar __param = (this && this.__param) || function (paramIndex, decorator) {\n    return function (target, key) { decorator(target, key, paramIndex); }\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.AuthController = void 0;\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst auth_service_1 = __webpack_require__(/*! ./auth.service */ \"./src/auth/auth.service.ts\");\nconst passport_1 = __webpack_require__(/*! @nestjs/passport */ \"@nestjs/passport\");\nlet AuthController = class AuthController {\n    constructor(authService) {\n        this.authService = authService;\n    }\n    async kakaoAuth() {\n        console.log('kakao login triggered');\n    }\n    async kakaoAuthCallback(req, res) {\n        const { user } = req;\n        console.log(user);\n        return this.authService.kakaoLogin(req, res);\n    }\n    async naverAuth() {\n        console.log('naver login triggered');\n    }\n    async naverAuthCallback(req, res) {\n        const { user } = req;\n        console.log(user);\n        return this.authService.naverLogin(req, res);\n    }\n};\nexports.AuthController = AuthController;\n__decorate([\n    (0, common_1.Get)('login/kakao'),\n    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('kakao')),\n    __metadata(\"design:type\", Function),\n    __metadata(\"design:paramtypes\", []),\n    __metadata(\"design:returntype\", Promise)\n], AuthController.prototype, \"kakaoAuth\", null);\n__decorate([\n    (0, common_1.Get)('kakao/callback'),\n    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('kakao')),\n    __param(0, (0, common_1.Req)()),\n    __param(1, (0, common_1.Res)()),\n    __metadata(\"design:type\", Function),\n    __metadata(\"design:paramtypes\", [Object, Object]),\n    __metadata(\"design:returntype\", Promise)\n], AuthController.prototype, \"kakaoAuthCallback\", null);\n__decorate([\n    (0, common_1.Get)('login/naver'),\n    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('naver')),\n    __metadata(\"design:type\", Function),\n    __metadata(\"design:paramtypes\", []),\n    __metadata(\"design:returntype\", Promise)\n], AuthController.prototype, \"naverAuth\", null);\n__decorate([\n    (0, common_1.Get)('naver/callback'),\n    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('naver')),\n    __param(0, (0, common_1.Req)()),\n    __param(1, (0, common_1.Res)()),\n    __metadata(\"design:type\", Function),\n    __metadata(\"design:paramtypes\", [Object, Object]),\n    __metadata(\"design:returntype\", Promise)\n], AuthController.prototype, \"naverAuthCallback\", null);\nexports.AuthController = AuthController = __decorate([\n    (0, common_1.Controller)('auth'),\n    __metadata(\"design:paramtypes\", [auth_service_1.AuthService])\n], AuthController);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/auth/auth.controller.ts?");
+
+/***/ }),
+
+/***/ "./src/auth/auth.module.ts":
+/*!*********************************!*\
+  !*** ./src/auth/auth.module.ts ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.AuthModule = void 0;\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst auth_controller_1 = __webpack_require__(/*! ./auth.controller */ \"./src/auth/auth.controller.ts\");\nconst auth_service_1 = __webpack_require__(/*! ./auth.service */ \"./src/auth/auth.service.ts\");\nconst auth_entity_1 = __webpack_require__(/*! @/entities/auth.entity */ \"./src/entities/auth.entity.ts\");\nconst typeorm_1 = __webpack_require__(/*! @nestjs/typeorm */ \"@nestjs/typeorm\");\nconst user_service_1 = __webpack_require__(/*! @/user/user.service */ \"./src/user/user.service.ts\");\nconst user_entity_1 = __webpack_require__(/*! @/entities/user.entity */ \"./src/entities/user.entity.ts\");\nconst jwt_social_kakao_strategy_1 = __webpack_require__(/*! ./strategy/jwt-social-kakao.strategy */ \"./src/auth/strategy/jwt-social-kakao.strategy.ts\");\nconst passport_1 = __webpack_require__(/*! @nestjs/passport */ \"@nestjs/passport\");\nconst jwt_1 = __webpack_require__(/*! @nestjs/jwt */ \"@nestjs/jwt\");\nconst jwt_social_naver_strategy_1 = __webpack_require__(/*! ./strategy/jwt-social-naver.strategy */ \"./src/auth/strategy/jwt-social-naver.strategy.ts\");\nlet AuthModule = class AuthModule {\n};\nexports.AuthModule = AuthModule;\nexports.AuthModule = AuthModule = __decorate([\n    (0, common_1.Module)({\n        imports: [\n            typeorm_1.TypeOrmModule.forFeature([auth_entity_1.Auth, user_entity_1.User]),\n            passport_1.PassportModule,\n            jwt_1.JwtModule.register({\n                secret: process.env.JWT_ACCESS_TOKEN_SECRET,\n                signOptions: { expiresIn: '30m' },\n            }),\n        ],\n        controllers: [auth_controller_1.AuthController],\n        providers: [auth_service_1.AuthService, user_service_1.UserService, jwt_social_kakao_strategy_1.JwtKakaoStrategy, jwt_social_naver_strategy_1.JwtNaverStrategy],\n    })\n], AuthModule);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/auth/auth.module.ts?");
+
+/***/ }),
+
+/***/ "./src/auth/auth.service.ts":
+/*!**********************************!*\
+  !*** ./src/auth/auth.service.ts ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nvar __metadata = (this && this.__metadata) || function (k, v) {\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(k, v);\n};\nvar __param = (this && this.__param) || function (paramIndex, decorator) {\n    return function (target, key) { decorator(target, key, paramIndex); }\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.AuthService = void 0;\nconst auth_entity_1 = __webpack_require__(/*! @/entities/auth.entity */ \"./src/entities/auth.entity.ts\");\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst typeorm_1 = __webpack_require__(/*! @nestjs/typeorm */ \"@nestjs/typeorm\");\nconst typeorm_2 = __webpack_require__(/*! typeorm */ \"typeorm\");\nconst user_service_1 = __webpack_require__(/*! @/user/user.service */ \"./src/user/user.service.ts\");\nconst uuid_1 = __webpack_require__(/*! uuid */ \"uuid\");\nconst jwt_1 = __webpack_require__(/*! @nestjs/jwt */ \"@nestjs/jwt\");\nlet AuthService = class AuthService {\n    constructor(authRepository, userService, jwtService) {\n        this.authRepository = authRepository;\n        this.userService = userService;\n        this.jwtService = jwtService;\n    }\n    async kakaoLogin(req, res) {\n        try {\n            const { user } = req;\n            let findUser = await this.userService.findOneBySocialId(user.socialId);\n            if (!findUser) {\n                const uuid = (0, uuid_1.v4)();\n                findUser = await this.userService.createUser(user, uuid);\n            }\n            console.log(findUser);\n            const findUserPayload = { userUuid: findUser.userUuid };\n            const access_token = await this.jwtService.sign(findUserPayload, {\n                secret: process.env.JWT_ACCESS_TOKEN_SECRET,\n                expiresIn: '30m',\n            });\n            const refresh_token = await this.jwtService.sign(findUserPayload, {\n                secret: process.env.JWT_REFRESH_TOKEN_SECRET,\n                expiresIn: '14d',\n            });\n            const userId = await this.userService.findOneById(findUser.userUuid);\n            const findAuth = await this.authRepository.create({\n                userId,\n                refreshToken: refresh_token,\n            });\n            await this.authRepository.save(findAuth);\n            const now = new Date();\n            now.setDate(now.getDate() + +'14d');\n            res.cookie('frefresh_token', refresh_token, {\n                expires: now,\n                httpOnly: true,\n            });\n            return {\n                ok: true,\n                access_token,\n            };\n        }\n        catch (error) {\n            return { ok: false, error: '구글 로그인 인증을 실패하였습니다.' };\n        }\n    }\n    async naverLogin(req, res) {\n        try {\n            const { user } = req;\n            let findUser = await this.userService.findOneBySocialId(user.socialId);\n            if (!findUser) {\n                const uuid = (0, uuid_1.v4)();\n                findUser = await this.userService.createUser(user, uuid);\n            }\n            console.log(findUser);\n            const findUserPayload = { userUuid: findUser.userUuid };\n            const access_token = await this.jwtService.sign(findUserPayload, {\n                secret: process.env.JWT_ACCESS_TOKEN_SECRET,\n                expiresIn: '30m',\n            });\n            const refresh_token = await this.jwtService.sign(findUserPayload, {\n                secret: process.env.JWT_REFRESH_TOKEN_SECRET,\n                expiresIn: '14d',\n            });\n            const userId = await this.userService.findOneById(findUser.userUuid);\n            const findAuth = await this.authRepository.create({\n                userId,\n                refreshToken: refresh_token,\n            });\n            await this.authRepository.save(findAuth);\n            const now = new Date();\n            now.setDate(now.getDate() + +'14d');\n            res.cookie('frefresh_token', refresh_token, {\n                expires: now,\n                httpOnly: true,\n            });\n            return {\n                ok: true,\n                access_token,\n            };\n        }\n        catch (error) {\n            return { ok: false, error: '구글 로그인 인증을 실패하였습니다.' };\n        }\n    }\n};\nexports.AuthService = AuthService;\nexports.AuthService = AuthService = __decorate([\n    (0, common_1.Injectable)(),\n    __param(0, (0, typeorm_1.InjectRepository)(auth_entity_1.Auth)),\n    __metadata(\"design:paramtypes\", [typeorm_2.Repository,\n        user_service_1.UserService,\n        jwt_1.JwtService])\n], AuthService);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/auth/auth.service.ts?");
+
+/***/ }),
+
+/***/ "./src/auth/strategy/jwt-social-kakao.strategy.ts":
+/*!********************************************************!*\
+  !*** ./src/auth/strategy/jwt-social-kakao.strategy.ts ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nvar __metadata = (this && this.__metadata) || function (k, v) {\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(k, v);\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.JwtKakaoStrategy = void 0;\nconst social_provider_enum_1 = __webpack_require__(/*! @/types/social-provider.enum */ \"./src/types/social-provider.enum.ts\");\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst config_1 = __webpack_require__(/*! @nestjs/config */ \"@nestjs/config\");\nconst passport_1 = __webpack_require__(/*! @nestjs/passport */ \"@nestjs/passport\");\nconst passport_kakao_1 = __webpack_require__(/*! passport-kakao */ \"passport-kakao\");\nlet JwtKakaoStrategy = class JwtKakaoStrategy extends (0, passport_1.PassportStrategy)(passport_kakao_1.Strategy, 'kakao') {\n    constructor(configService) {\n        super({\n            clientID: configService.get('KAKAO_REST_API_KEY'),\n            callbackURL: configService.get('KAKAO_REDIRECT_URL'),\n        });\n        this.configService = configService;\n    }\n    async validate(accessToken, refreshToken, profile, done) {\n        console.log(profile);\n        try {\n            console.log(profile);\n            const { id: kakaoId, _json } = profile;\n            const nickname = _json.properties?.nickname;\n            const profileImage = _json.properties?.profile_image;\n            const user = {\n                socialId: kakaoId,\n                nickname,\n                profileImage,\n                socialProvider: social_provider_enum_1.SocialProvider.KAKAO,\n            };\n            done(null, user);\n        }\n        catch (error) {\n            done(error);\n        }\n    }\n};\nexports.JwtKakaoStrategy = JwtKakaoStrategy;\nexports.JwtKakaoStrategy = JwtKakaoStrategy = __decorate([\n    (0, common_1.Injectable)(),\n    __metadata(\"design:paramtypes\", [config_1.ConfigService])\n], JwtKakaoStrategy);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/auth/strategy/jwt-social-kakao.strategy.ts?");
+
+/***/ }),
+
+/***/ "./src/auth/strategy/jwt-social-naver.strategy.ts":
+/*!********************************************************!*\
+  !*** ./src/auth/strategy/jwt-social-naver.strategy.ts ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nvar __metadata = (this && this.__metadata) || function (k, v) {\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(k, v);\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.JwtNaverStrategy = void 0;\nconst social_provider_enum_1 = __webpack_require__(/*! @/types/social-provider.enum */ \"./src/types/social-provider.enum.ts\");\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst config_1 = __webpack_require__(/*! @nestjs/config */ \"@nestjs/config\");\nconst passport_1 = __webpack_require__(/*! @nestjs/passport */ \"@nestjs/passport\");\nconst passport_naver_1 = __webpack_require__(/*! passport-naver */ \"passport-naver\");\nlet JwtNaverStrategy = class JwtNaverStrategy extends (0, passport_1.PassportStrategy)(passport_naver_1.Strategy, 'naver') {\n    constructor(configService) {\n        super({\n            clientID: configService.get('NAVER_ID'),\n            clientSecret: configService.get('NAVER_SECRET'),\n            callbackURL: configService.get('NAVER_REDIRECT_URL'),\n        });\n        this.configService = configService;\n    }\n    async validate(accessToken, refreshToken, profile, done) {\n        try {\n            console.log(profile);\n            const { id: naverId, _json } = profile;\n            const nickname = _json.nickname;\n            const profileImage = _json.profile_image;\n            const user = {\n                socialId: naverId,\n                nickname,\n                profileImage,\n                socialProvider: social_provider_enum_1.SocialProvider.NAVER,\n            };\n            done(null, user);\n        }\n        catch (error) {\n            done(error);\n        }\n    }\n};\nexports.JwtNaverStrategy = JwtNaverStrategy;\nexports.JwtNaverStrategy = JwtNaverStrategy = __decorate([\n    (0, common_1.Injectable)(),\n    __metadata(\"design:paramtypes\", [config_1.ConfigService])\n], JwtNaverStrategy);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/auth/strategy/jwt-social-naver.strategy.ts?");
 
 /***/ }),
 
@@ -113,6 +168,28 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.ApiUploadImage = ApiUploadImage;\nexports.ApiDeleteImage = ApiDeleteImage;\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst swagger_1 = __webpack_require__(/*! @nestjs/swagger */ \"@nestjs/swagger\");\nfunction ApiUploadImage() {\n    return (0, common_1.applyDecorators)((0, swagger_1.ApiOperation)({\n        summary: '이미지 업로드',\n        description: 'S3 Bucket에 이미지 파일을 업로드합니다.',\n    }), (0, swagger_1.ApiConsumes)('multipart/form-data'), (0, swagger_1.ApiBody)({\n        schema: {\n            type: 'object',\n            properties: {\n                image: {\n                    type: 'string',\n                    format: 'binary',\n                    description: '업로드할 이미지 파일 (jpg, jpeg, png, gif만 가능)',\n                },\n            },\n        },\n    }), (0, swagger_1.ApiResponse)({\n        status: 201,\n        description: '이미지가 성공적으로 업로드됨',\n        schema: {\n            type: 'object',\n            properties: {\n                imageUrl: {\n                    type: 'string',\n                    example: 'https://example-bucket.s3.amazonaws.com/images/example-image.jpg',\n                },\n                message: {\n                    type: 'string',\n                    example: '이미지가 업로드되었습니다.',\n                },\n            },\n        },\n    }), (0, swagger_1.ApiResponse)({\n        status: 400,\n        description: '잘못된 요청',\n        schema: {\n            type: 'object',\n            properties: {\n                message: {\n                    type: 'string',\n                    example: '이미지 업로드 실패: The bucket does not allow ACLs',\n                },\n                error: {\n                    type: 'string',\n                    example: 'Bad Request',\n                },\n                statusCode: {\n                    type: 'number',\n                    example: 400,\n                },\n            },\n        },\n    }));\n}\nfunction ApiDeleteImage() {\n    return (0, common_1.applyDecorators)((0, swagger_1.ApiOperation)({\n        summary: '이미지 삭제',\n        description: '업로드된 이미지를 S3에서 삭제합니다.',\n    }), (0, swagger_1.ApiParam)({\n        name: 'url',\n        description: '삭제할 이미지 URL',\n        required: true,\n    }), (0, swagger_1.ApiResponse)({\n        status: 200,\n        description: '이미지가 성공적으로 삭제됨',\n        schema: {\n            type: 'object',\n            properties: {\n                message: {\n                    type: 'string',\n                    example: '이미지가 삭제되었습니다.',\n                },\n            },\n        },\n    }), (0, swagger_1.ApiResponse)({\n        status: 400,\n        description: '잘못된 요청',\n        schema: {\n            type: 'object',\n            properties: {\n                message: {\n                    type: 'string',\n                    example: '이미지 삭제 실패: The specified key does not exist',\n                },\n                error: {\n                    type: 'string',\n                    example: 'Bad Request',\n                },\n                statusCode: {\n                    type: 'number',\n                    example: 400,\n                },\n            },\n        },\n    }));\n}\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/decorators/swagger.decorator.ts?");
+
+/***/ }),
+
+/***/ "./src/entities/auth.entity.ts":
+/*!*************************************!*\
+  !*** ./src/entities/auth.entity.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nvar __metadata = (this && this.__metadata) || function (k, v) {\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(k, v);\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Auth = void 0;\nconst typeorm_1 = __webpack_require__(/*! typeorm */ \"typeorm\");\nlet Auth = class Auth {\n};\nexports.Auth = Auth;\n__decorate([\n    (0, typeorm_1.PrimaryGeneratedColumn)({ name: 'id' }),\n    __metadata(\"design:type\", Number)\n], Auth.prototype, \"id\", void 0);\n__decorate([\n    (0, typeorm_1.Column)({ name: 'refresh_token', type: 'varchar', nullable: true }),\n    __metadata(\"design:type\", String)\n], Auth.prototype, \"refreshToken\", void 0);\n__decorate([\n    (0, typeorm_1.Column)({ name: 'user_id', type: 'int' }),\n    __metadata(\"design:type\", Number)\n], Auth.prototype, \"userId\", void 0);\n__decorate([\n    (0, typeorm_1.CreateDateColumn)({ name: 'created_at', type: 'timestamptz' }),\n    __metadata(\"design:type\", Date)\n], Auth.prototype, \"createdAt\", void 0);\n__decorate([\n    (0, typeorm_1.UpdateDateColumn)({ name: 'updated_at', type: 'timestamptz' }),\n    __metadata(\"design:type\", Date)\n], Auth.prototype, \"updatedAt\", void 0);\nexports.Auth = Auth = __decorate([\n    (0, typeorm_1.Entity)('auth')\n], Auth);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/entities/auth.entity.ts?");
+
+/***/ }),
+
+/***/ "./src/entities/user.entity.ts":
+/*!*************************************!*\
+  !*** ./src/entities/user.entity.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nvar __metadata = (this && this.__metadata) || function (k, v) {\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(k, v);\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.User = void 0;\nconst social_provider_enum_1 = __webpack_require__(/*! @/types/social-provider.enum */ \"./src/types/social-provider.enum.ts\");\nconst typeorm_1 = __webpack_require__(/*! typeorm */ \"typeorm\");\nlet User = class User {\n};\nexports.User = User;\n__decorate([\n    (0, typeorm_1.PrimaryGeneratedColumn)({ name: 'id' }),\n    __metadata(\"design:type\", Number)\n], User.prototype, \"id\", void 0);\n__decorate([\n    (0, typeorm_1.Column)({ name: 'user_uuid', type: 'uuid', unique: true }),\n    __metadata(\"design:type\", String)\n], User.prototype, \"userUuid\", void 0);\n__decorate([\n    (0, typeorm_1.Column)({ name: 'nickname', type: 'varchar', unique: true }),\n    __metadata(\"design:type\", String)\n], User.prototype, \"nickname\", void 0);\n__decorate([\n    (0, typeorm_1.Column)({ name: 'profile_image', type: 'varchar', nullable: true }),\n    __metadata(\"design:type\", String)\n], User.prototype, \"profileImage\", void 0);\n__decorate([\n    (0, typeorm_1.Column)({ name: 'social_provider', type: 'enum', enum: social_provider_enum_1.SocialProvider }),\n    __metadata(\"design:type\", String)\n], User.prototype, \"socialProvider\", void 0);\n__decorate([\n    (0, typeorm_1.Column)({ name: 'social_id', type: 'varchar', nullable: true }),\n    __metadata(\"design:type\", String)\n], User.prototype, \"socialId\", void 0);\n__decorate([\n    (0, typeorm_1.CreateDateColumn)({ name: 'created_at', type: 'timestamptz' }),\n    __metadata(\"design:type\", Date)\n], User.prototype, \"createdAt\", void 0);\n__decorate([\n    (0, typeorm_1.UpdateDateColumn)({ name: 'updated_at', type: 'timestamptz' }),\n    __metadata(\"design:type\", Date)\n], User.prototype, \"updatedAt\", void 0);\nexports.User = User = __decorate([\n    (0, typeorm_1.Entity)('user')\n], User);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/entities/user.entity.ts?");
 
 /***/ }),
 
@@ -204,6 +281,50 @@ eval("\nvar __decorate = (this && this.__decorate) || function (decorators, targ
 
 /***/ }),
 
+/***/ "./src/types/social-provider.enum.ts":
+/*!*******************************************!*\
+  !*** ./src/types/social-provider.enum.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.SocialProvider = void 0;\nvar SocialProvider;\n(function (SocialProvider) {\n    SocialProvider[\"KAKAO\"] = \"KAKAO\";\n    SocialProvider[\"NAVER\"] = \"NAVER\";\n})(SocialProvider || (exports.SocialProvider = SocialProvider = {}));\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/types/social-provider.enum.ts?");
+
+/***/ }),
+
+/***/ "./src/user/user.controller.ts":
+/*!*************************************!*\
+  !*** ./src/user/user.controller.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.UserController = void 0;\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nlet UserController = class UserController {\n};\nexports.UserController = UserController;\nexports.UserController = UserController = __decorate([\n    (0, common_1.Controller)('user')\n], UserController);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/user/user.controller.ts?");
+
+/***/ }),
+
+/***/ "./src/user/user.module.ts":
+/*!*********************************!*\
+  !*** ./src/user/user.module.ts ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.UserModule = void 0;\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst user_controller_1 = __webpack_require__(/*! ./user.controller */ \"./src/user/user.controller.ts\");\nconst user_service_1 = __webpack_require__(/*! ./user.service */ \"./src/user/user.service.ts\");\nconst user_entity_1 = __webpack_require__(/*! @/entities/user.entity */ \"./src/entities/user.entity.ts\");\nconst typeorm_1 = __webpack_require__(/*! @nestjs/typeorm */ \"@nestjs/typeorm\");\nlet UserModule = class UserModule {\n};\nexports.UserModule = UserModule;\nexports.UserModule = UserModule = __decorate([\n    (0, common_1.Module)({\n        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User])],\n        controllers: [user_controller_1.UserController],\n        providers: [user_service_1.UserService],\n    })\n], UserModule);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/user/user.module.ts?");
+
+/***/ }),
+
+/***/ "./src/user/user.service.ts":
+/*!**********************************!*\
+  !*** ./src/user/user.service.ts ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\n};\nvar __metadata = (this && this.__metadata) || function (k, v) {\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(k, v);\n};\nvar __param = (this && this.__param) || function (paramIndex, decorator) {\n    return function (target, key) { decorator(target, key, paramIndex); }\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.UserService = void 0;\nconst user_entity_1 = __webpack_require__(/*! @/entities/user.entity */ \"./src/entities/user.entity.ts\");\nconst common_1 = __webpack_require__(/*! @nestjs/common */ \"@nestjs/common\");\nconst typeorm_1 = __webpack_require__(/*! @nestjs/typeorm */ \"@nestjs/typeorm\");\nconst typeorm_2 = __webpack_require__(/*! typeorm */ \"typeorm\");\nlet UserService = class UserService {\n    constructor(repo) {\n        this.repo = repo;\n    }\n    findOneBySocialId(socialId) {\n        return this.repo.findOneBy({ socialId });\n    }\n    async findOneById(userUuid) {\n        const user = await this.repo.findOne({ where: { userUuid } });\n        if (!user) {\n            throw new Error('not found user!');\n        }\n        return user.id;\n    }\n    createUser(user, uuid) {\n        const newUser = this.repo.create({\n            userUuid: uuid,\n            nickname: user.nickname,\n            profileImage: user.profileImage,\n            socialProvider: user.socialProvider,\n            socialId: user.socialId,\n        });\n        return this.repo.save(newUser);\n    }\n};\nexports.UserService = UserService;\nexports.UserService = UserService = __decorate([\n    (0, common_1.Injectable)(),\n    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),\n    __metadata(\"design:paramtypes\", [typeorm_2.Repository])\n], UserService);\n\n\n//# sourceURL=webpack://ssu-led-backend/./src/user/user.service.ts?");
+
+/***/ }),
+
 /***/ "@nestjs/common":
 /*!*********************************!*\
   !*** external "@nestjs/common" ***!
@@ -234,6 +355,28 @@ module.exports = require("@nestjs/config");
 
 "use strict";
 module.exports = require("@nestjs/core");
+
+/***/ }),
+
+/***/ "@nestjs/jwt":
+/*!******************************!*\
+  !*** external "@nestjs/jwt" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@nestjs/jwt");
+
+/***/ }),
+
+/***/ "@nestjs/passport":
+/*!***********************************!*\
+  !*** external "@nestjs/passport" ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@nestjs/passport");
 
 /***/ }),
 
@@ -311,6 +454,28 @@ module.exports = require("dotenv");
 
 "use strict";
 module.exports = require("nest-winston");
+
+/***/ }),
+
+/***/ "passport-kakao":
+/*!*********************************!*\
+  !*** external "passport-kakao" ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("passport-kakao");
+
+/***/ }),
+
+/***/ "passport-naver":
+/*!*********************************!*\
+  !*** external "passport-naver" ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("passport-naver");
 
 /***/ }),
 
@@ -408,7 +573,7 @@ module.exports = require("winston");
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("1da22c52d94258889ba4")
+/******/ 		__webpack_require__.h = () => ("d1d9a65f283198a382dc")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

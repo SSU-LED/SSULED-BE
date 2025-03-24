@@ -9,7 +9,7 @@ import { winstonConfig } from '../config/logging.config';
 import { UploadsModule } from './modules/uploads/uploads.module';
 import { S3Module } from './modules/s3/s3.module';
 import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -27,7 +27,7 @@ import { UserModule } from './user/user.module';
     UploadsModule,
     S3Module,
     AuthModule,
-    UserModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
