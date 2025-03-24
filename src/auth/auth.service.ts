@@ -66,7 +66,7 @@ export class AuthService {
       };
     } catch (error) {
       console.log(error);
-      return { ok: false, error: '구글 로그인 인증을 실패하였습니다.' };
+      return { ok: false, error: '카카오 로그인 인증을 실패하였습니다.' };
     }
   }
 
@@ -121,7 +121,7 @@ export class AuthService {
       };
     } catch (error) {
       console.log(error);
-      return { ok: false, error: '구글 로그인 인증을 실패하였습니다.' };
+      return { ok: false, error: '네이버 로그인 인증을 실패하였습니다.' };
     }
   }
 }
