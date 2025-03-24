@@ -12,7 +12,6 @@ export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {
       clientID: configService.get('NAVER_ID'),
       clientSecret: configService.get('NAVER_SECRET'),
       callbackURL: configService.get('NAVER_REDIRECT_URL'),
-      passReqToCallback: true,
     });
   }
 

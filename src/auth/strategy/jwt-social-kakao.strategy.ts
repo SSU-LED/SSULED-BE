@@ -10,7 +10,6 @@ export class JwtKakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
     super({
       clientID: configService.get('KAKAO_REST_API_KEY'),
       callbackURL: configService.get('KAKAO_REDIRECT_URL'),
-      passReqToCallback: true,
     });
   }
 
