@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SocialRequest } from './auth.controller';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { UsersService } from '@/modules/users/users.service';
 import { v4 as uuidv4 } from 'uuid';
 import { JwtService } from '@nestjs/jwt';
@@ -56,16 +56,12 @@ export class AuthService {
     // 쿠키 설정 (프론트로 어떻게 넘길지 고민중)
     const now = new Date();
     now.setDate(now.getDate() + 14);
-    res.cookie('frefresh_token', refresh_token, {
-      expires: now,
-      httpOnly: true,
-      // secure: process.env.NODE_ENV === 'production' ? true : false,
-      // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    });
-    return {
+    res.setHeader('accessToken', `Bearer ${access_token}`);
+    res.setHeader('refreshToken', refresh_token);
+    return res.json({
       ok: true,
-      access_token,
-    };
+      message: '로그인 성공',
+    });
   }
 
   async kakaoLogin(req: SocialRequest, res: Response) {
@@ -87,6 +83,86 @@ export class AuthService {
     } catch (error) {
       console.log(error);
       return { ok: false, error: '네이버 로그인 인증을 실패하였습니다.' };
+    }
+  }
+
+  // refreshToken으로 accessToken 재발급
+  async RefreshToken(req: Request, res: Response) {
+    const refreshToken = req.headers['authorization']?.replace('Bearer ', '');
+
+    if (!refreshToken) {
+      return res.status(401).json({ ok: false, message: '리프레시 토큰 없음' });
+    }
+
+    try {
+      // 1. 리프레시 토큰 유효성 검사
+      const payload = await this.jwtService.verifyAsync(refreshToken, {
+        secret: process.env.JWT_REFRESH_TOKEN_SECRET,
+      });
+
+      const userId = await this.userService.findOneById(payload.userUuid);
+
+      if (!userId) {
+        return res.status(401).json({ ok: false, message: '유효하지 않음' });
+      }
+
+      // 2. DB에 저장된 refreshToken과 비교
+      const auth = await this.authRepository.findOne({
+        where: { userId },
+      });
+
+      if (!auth || auth.refreshToken !== refreshToken) {
+        return res
+          .status(401)
+          .json({ ok: false, message: '리프레시 토큰 불일치' });
+      }
+
+      // 3. 새 accessToken 발급
+      const newAccessToken = this.jwtService.sign(
+        {
+          userUuid: payload.userUuid,
+        },
+        {
+          secret: process.env.JWT_ACCESS_TOKEN_SECRET,
+          expiresIn: '30m',
+        },
+      );
+
+      // 리프레시 토큰 만료 여부 확인
+      const nowInSec = Math.floor(Date.now() / 1000);
+      let newRefreshToken = null;
+
+      if (payload.exp && payload.exp < nowInSec) {
+        // refreshToken도 만료 => 새 refreshToken 재발급
+        newRefreshToken = this.jwtService.sign(
+          { userUuid: payload.userUuid },
+          {
+            secret: process.env.JWT_REFRESH_TOKEN_SECRET,
+            expiresIn: '14d',
+          },
+        );
+
+        auth.refreshToken = newRefreshToken;
+        await this.authRepository.save(auth);
+      }
+
+      // 응답 헤더에 토큰 세팅
+      res.setHeader('accessToken', `Bearer ${newAccessToken}`);
+      if (newRefreshToken) {
+        res.setHeader('refreshToken', newRefreshToken);
+      }
+
+      return res.json({
+        ok: true,
+        message: newRefreshToken
+          ? 'accessToken 및 refreshToken 재발급 완료'
+          : 'accessToken 재발급 완료',
+      });
+    } catch (error) {
+      console.log(error);
+      return res
+        .status(401)
+        .json({ ok: false, message: '리프레시 토큰 만료 혹은 잘못됨' });
     }
   }
 }

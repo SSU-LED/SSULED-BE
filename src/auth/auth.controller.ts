@@ -1,7 +1,7 @@
-import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 export interface SocialRequest {
   user: {
@@ -52,5 +52,11 @@ export class AuthController {
     console.log(user);
     // return res.send(user);
     return this.authService.naverLogin(req, res);
+  }
+
+  // refreshToken으로 accessToken 재발급
+  @Post('refresh')
+  async Refresh(@Req() req: Request, @Res() res: Response) {
+    return this.authService.RefreshToken(req, res);
   }
 }
